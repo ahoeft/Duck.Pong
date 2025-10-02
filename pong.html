@@ -69,11 +69,19 @@
             context.fill();
         }
 
+        function drawScore() {
+            context.fillStyle = "white";
+            context.font = "30px Arial";
+            context.fillText(`Player: ${player.score}`, 50, 30);
+            context.fillText(`Computer: ${computer.score}`, canvas.width - 150, 30);
+        }
+
         function draw() {
             drawRect(0, 0, canvas.width, canvas.height, "black");
             drawRect(player.x, player.y, player.width, player.height, player.color);
             drawRect(computer.x, computer.y, computer.width, computer.height, computer.color);
             drawArc(ball.x, ball.y, ball.size, ball.color);
+            drawScore();
         }
 
         function update() {
@@ -83,8 +91,6 @@
             if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
                 ball.velocityY = -ball.velocityY;
             }
-
-            let playerPaddle = (ball.x < canvas.width / 2) ? player : computer;
 
             if (ball.x - ball.size < player.x + player.width && ball.y > player.y && ball.y < player.y + player.height) {
                 ball.velocityX = -ball.velocityX;
